@@ -1,4 +1,4 @@
-![Sample app icon](linux/256.png)
+![Sample app icon](linux/128.png)
 
 The difference between the icons on Mac and the other platforms is that on Mac,
 they contain a ~5% transparent margin. This is because otherwise they look too
