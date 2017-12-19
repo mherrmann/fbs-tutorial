@@ -38,7 +38,7 @@ To compile the app to a standalone executable:
 
     python -m fbs freeze
 
-This produces the folder `target/app`. You can copy this folder to any other
+This produces the folder `target/App.app`. You can copy this folder to any other
 computer (with the same OS as yours) and run your app there! Isn't that awesome?
 
 ## The source code
