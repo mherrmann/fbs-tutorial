@@ -125,9 +125,9 @@ there is no `src/...`, because the directory structure is completely different.
 The answer is that `get_resource(...)` is clever enough to determine whether it
 is running from source, or from the compiled form of your app. To ensure that
 the image is in fact distributed alongside your application, `fbs` copies all
-files from `src/main/resources` into the `target/app` folder. So, if you have
-data files that you want to include (such as images, `.qss` style sheets - Qt's
-equivalent of `.css` files - etc.) place them in `src/main/resources`.
+files from `src/main/resources` into the `target/App.app` folder. So, if you
+have data files that you want to include (such as images, `.qss` style sheets -
+Qt's equivalent of `.css` files - etc.) place them in `src/main/resources`.
 
 ### Different OSs
 Often, you will want to use different versions of a resource file depending on
