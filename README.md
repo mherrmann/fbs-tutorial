@@ -1,5 +1,5 @@
-# fbs-sample
-Sample project for creating cross-platform desktop appications with
+# fbs tutorial
+Tutorial for creating cross-platform desktop applications with
 [fbs](https://github.com/mherrmann/fbs)
 
 ## Getting Started
