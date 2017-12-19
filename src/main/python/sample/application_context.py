@@ -1,0 +1,15 @@
+from fbs_runtime.application_context import ApplicationContext, \
+	cached_property
+from PyQt5.QtWidgets import QApplication, QWidget
+
+class AppContext(ApplicationContext):
+	def run(self):
+		self.main_window.show()
+		return self.app.exec_()
+	@cached_property
+	def main_window(self):
+		result = QWidget()
+		result.setWindowTitle('Hello World!')
+		result.resize(250, 150)
+		result.move(300, 300)
+		return result
