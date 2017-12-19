@@ -94,12 +94,12 @@ The first time `self.image` is accessed, the `return QPixmap(...)` code from
 above is executed. After that, the value is cached and returned without
 executing the code again.
 
-This makes `@cached_property` very useful for instantiating and connecting the
+`@cached_property` is extremely useful for instantiating and connecting the
 Python objects that make up your application. For each component, define a
 `@cached_property`. If it requires other objects, simply access them as
 properties, like `self.image` above. The fact that all parts of your application
 live in one place (the application context) makes it extremely easy to manage
-them and see what is needed where.
+them and see what is used where.
 
 To see the new example in action, change the line
 
@@ -116,18 +116,18 @@ from sample.application_context_2 import AppContext
 Then, run `python -m fbs run` again. You will be rewarded ;-)
 
 ### Resources
-Another feature of our new example was the call `self.get_resource(...)`.
-It loads an image that lives in the folder
+Another feature of our new example was the call
+`self.get_resource('success.jpg')`. It loads an image that lives in the folder
 [`src/main/resources`](src/main/resources/base).
-But what if your user is running the compiled form of your app? In that case,
-there is no `src/...` because the directory structure is completely different.
+But what if the user is running the compiled form of your app? In that case,
+there is no `src/...`, because the directory structure is completely different.
 
-The answer is that `get_resource(...)` is clever enough to determine if it is
-running from source, or from the compiled form of your app. To ensure that the
-image is in fact distributed alongside your application, `fbs` copies all files
-from `src/main/resources` into the `target/app` folder. So, if you have data
-files that you want to include, such as images, `.qss` style sheets (Qt's
-equivalent of `.css` files) and many others, place them in `src/main/resources`.
+The answer is that `get_resource(...)` is clever enough to determine whether it
+is running from source, or from the compiled form of your app. To ensure that
+the image is in fact distributed alongside your application, `fbs` copies all
+files from `src/main/resources` into the `target/app` folder. So, if you have
+data files that you want to include (such as images, `.qss` style sheets - Qt's
+equivalent of `.css` files, etc.) place them in `src/main/resources`.
 
 ### Different OSs
 Often, you will want to use different versions of a resource file depending on
