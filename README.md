@@ -8,7 +8,7 @@ This example should work on Windows, Mac and Ubuntu. You need Python 3.5.
 
 Clone this repository and `cd` into it:
 
-    git clone https://github.com/mherrmann/fbs-sample
+    git clone https://github.com/mherrmann/fbs-tutorial
     cd fbs-sample
 
 Create a virtual environment:
