@@ -29,3 +29,15 @@ Install the required libraries (most notably, `fbs` and `PyQt5`):
 Run the sample app:
 
     python -m fbs run
+
+This shows a (admittedly not very exciting) window:
+
+![Screenshot of sample app](screenshot.png)
+
+To compile the app to a standalone executable that you can distribute to your
+users:
+
+    python -m fbs freeze
+
+The output is in `target/app`. You should be able to copy this folder to any
+other computer (with the same OS as yours) and run the app there.
