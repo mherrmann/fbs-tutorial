@@ -4,7 +4,7 @@ Sample project for creating cross-platform desktop appications with
 
 ## Getting Started
 This example should work on Windows, Mac and Ubuntu. You need Python 3.5.
-Higher versions may work as well, but are not officially supported).
+(Higher versions may work as well, but are not officially supported.)
 
 Clone this repository and `cd` into it:
 
@@ -22,7 +22,7 @@ Activate the virtual environment:
     # On Windows:
     call venv\scripts\activate.bat
 
-Install the required libraries (`fbs` and `PyQt5`):
+Install the required libraries (most notably, `fbs` and `PyQt5`):
 
     pip install -r requirements.txt
 
