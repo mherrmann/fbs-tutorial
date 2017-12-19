@@ -1,9 +1,9 @@
 # fbs tutorial
 Tutorial for creating cross-platform desktop applications with
-[fbs](https://github.com/mherrmann/fbs)
+[fbs](https://github.com/mherrmann/fbs).
 
 ## Getting Started
-This example should work on Windows, Mac and Ubuntu. You need Python 3.5.
+This tutorial is meant for Windows, Mac and Ubuntu. You need Python 3.5.
 (Higher versions may work as well, but are not officially supported.)
 
 Clone this repository and `cd` into it:
@@ -127,7 +127,7 @@ is running from source, or from the compiled form of your app. To ensure that
 the image is in fact distributed alongside your application, `fbs` copies all
 files from `src/main/resources` into the `target/app` folder. So, if you have
 data files that you want to include (such as images, `.qss` style sheets - Qt's
-equivalent of `.css` files, etc.) place them in `src/main/resources`.
+equivalent of `.css` files - etc.) place them in `src/main/resources`.
 
 ### Different OSs
 Often, you will want to use different versions of a resource file depending on
