@@ -39,30 +39,31 @@ To compile the app to a standalone executable:
     python -m fbs freeze
 
 This produces the folder `target/app`. You can copy this folder to any other
-computer (with the same OS as yours) and run your app there. Isn't that awesome?
+computer (with the same OS as yours) and run your app there! Isn't that awesome?
 
 ## The source code
-The source code for the above app is in [`src/main/python`](src/main/python).
-It contains a [`main.py` script](src/main/python/sample/main.py), which serves
-as the entry point for the application. This script instantiates and then runs
-an _application context_. This is defined in
+The source code for the above app is in
+[`src/main/python`](src/main/python/sample). It contains a
+[`main.py` script](src/main/python/sample/main.py), which serves as the entry
+point for the application. That script instantiates and then runs an
+_application context_, which is defined in
 [`application_context.py`](src/main/python/sample/application_context.py).
 
 Your apps should follow the same structure:
 
  * Create a subclass of `fbs_runtime.application_context.ApplicationContext`.
  * Define a `run()` method that ends with `return self.app.exec_()`.
- * Use `cached_property` to define the objects of your app.
- * In your `main` script, instantiate your application context, invoke its
+ * Use `@cached_property` to define the objects of your app.
+ * In your `main` script, instantiate the application context, invoke its
    `run()` method and pass the return value to `sys.exit(...)`.
 
-Subclassing `ApplicationContext` may seem complicated at first. But it has
-several advantages: First, it lets `fbs` define useful default behaviour (such
-as setting the [app icon](src/main/icons) or letting you access resources files
-bundled with your app). Also, as your application becomes more complex, you will
-find that an application context is extremely useful for "wiring together" the
-various Python objects that make up your app. The next section demonstrates both
-of these advantages.
+This  may seem complicated at first. But it has several advantages: First, it
+lets `fbs` define useful default behaviour (such as setting the
+[app icon](src/main/icons) or letting you access resource files bundled with
+your app). Also, as your application becomes more complex, you will find that
+an application context is extremely useful for "wiring together" the various
+Python objects that make up your app. The next section demonstrates both of
+these advantages.
 
 ## A more complicated example
 Take a look at
@@ -74,7 +75,8 @@ class AppContext(ApplicationContext):
     ...
     @cached_property
     def image(self):
-        return QPixmap(self.get_resource('success.jpg'))```
+        return QPixmap(self.get_resource('success.jpg'))
+```
 
 A `@cached_property` is simply a Python `@property` whose value is cached.
 Here's how it is used:
@@ -85,7 +87,8 @@ class AppContext(ApplicationContext):
     @cached_property
     def main_window(self):
         ...
-        image_container.setPixmap(self.image)```
+        image_container.setPixmap(self.image)
+```
 
 The first time `self.image` is accessed, the `return QPixmap(...)` code is
 executed. After that, the value is cached and returned without executing the
@@ -101,12 +104,14 @@ to manage them and see what is needed where.
 To see the above example in action, change the line
 
 ```python
-from sample.application_context import AppContext```
+from sample.application_context import AppContext
+```
 
 in your copy of [`main.py`](src/main/python/sample/main.py) to
 
 ```python
-from sample.application_context_2 import AppContext```
+from sample.application_context_2 import AppContext
+```
 
 Then, run `python -m fbs run`. You will be rewarded ;-)
 
