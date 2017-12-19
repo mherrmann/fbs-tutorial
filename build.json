@@ -1,0 +1,4 @@
+{
+	"app_name": "Sample",
+	"main_module": "src/main/python/sample/main.py"
+}
