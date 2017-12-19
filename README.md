@@ -144,3 +144,14 @@ searches the following locations:
 
 If it can't find the file in any of these folders, it falls back to
 `src/main/resources/base`.
+
+## Up next...
+As of Dec 19, 2017, this tutorial is a work in progress. Still to come:
+
+ * Creating an installer for your app
+ * Codesigning so your users don't get ugly "app is untrusted" messages
+ * Automatic updates
+
+Feel free to share the link to this tutorial! If you are not yet on fbs's
+mailing list and want to be notified when the tutorial is expanded,
+[sign up here](http://eepurl.com/ddgpnf).
