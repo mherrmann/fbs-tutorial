@@ -45,9 +45,38 @@ computer (with the same OS as yours) and run your app there! Isn't that awesome?
 The source code for the above app is in
 [`src/main/python`](src/main/python/sample). It contains a
 [`main.py` script](src/main/python/sample/main.py), which serves as the entry
-point for the application. That script instantiates and then runs an
-_application context_, which is defined in
-[`application_context.py`](src/main/python/sample/application_context.py).
+point for the application:
+
+```python
+from sample.application_context import AppContext
+
+import sys
+
+if __name__ == '__main__':
+    appctxt = AppContext()
+    exit_code = appctxt.run()
+    sys.exit(exit_code)
+```
+
+The script instantiates and then runs an _application context_. This is defined
+in [`application_context.py`](src/main/python/sample/application_context.py):
+
+```python
+from fbs_runtime.application_context import ApplicationContext, \
+    cached_property
+from PyQt5.QtWidgets import QApplication, QMainWindow
+
+class AppContext(ApplicationContext):
+    def run(self):
+        self.main_window.show()
+        return self.app.exec_()
+    @cached_property
+    def main_window(self):
+        result = QMainWindow()
+        result.setWindowTitle('Hello World!')
+        result.resize(250, 150)
+        return result
+```
 
 Your apps should follow the same structure:
 
@@ -146,7 +175,7 @@ If it can't find the file in any of these folders, it falls back to
 `src/main/resources/base`.
 
 ## Up next...
-As of Dec 19, 2017, this tutorial is a work in progress. Still to come:
+As of Dec 20, 2017, this tutorial is a work in progress. Still to come:
 
  * Creating an installer for your app
  * Codesigning so your users don't get ugly "app is untrusted" messages
