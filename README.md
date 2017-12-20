@@ -1,8 +1,4 @@
 # fbs tutorial
-Tutorial for creating cross-platform desktop applications with
-[fbs](https://github.com/mherrmann/fbs).
-
-## Getting Started
 This tutorial is meant for Windows, Mac and Ubuntu. You need Python 3.5.
 (Higher versions may work as well, but are not officially supported.)
 
