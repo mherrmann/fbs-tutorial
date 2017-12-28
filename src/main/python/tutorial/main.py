@@ -1,4 +1,4 @@
-from sample.application_context import AppContext
+from tutorial.application_context import AppContext
 
 import sys
 

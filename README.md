@@ -34,17 +34,18 @@ To compile the app to a standalone executable:
 
     python -m fbs freeze
 
-This produces the folder `target/App.app`. You can copy this folder to any other
-computer (with the same OS as yours) and run your app there! Isn't that awesome?
+This produces the folder `target/Tutorial`. You can copy this folder to any
+other computer (with the same OS as yours) and run your app there! Isn't that
+awesome?
 
 ## The source code
 The source code for the above app is in
-[`src/main/python`](src/main/python/sample). It contains a
-[`main.py` script](src/main/python/sample/main.py), which serves as the entry
+[`src/main/python`](src/main/python/tutorial). It contains a
+[`main.py` script](src/main/python/tutorial/main.py), which serves as the entry
 point for the application:
 
 ```python
-from sample.application_context import AppContext
+from tutorial.application_context import AppContext
 
 import sys
 
@@ -55,7 +56,7 @@ if __name__ == '__main__':
 ```
 
 The script instantiates and then runs an _application context_. This is defined
-in [`application_context.py`](src/main/python/sample/application_context.py):
+in [`application_context.py`](src/main/python/tutorial/application_context.py):
 
 ```python
 from fbs_runtime.application_context import ApplicationContext, \
@@ -92,7 +93,7 @@ these advantages.
 
 ## A more complicated example
 Take a look at
-[`application_context_2.py`](src/main/python/sample/application_context_2.py).
+[`application_context_2.py`](src/main/python/tutorial/application_context_2.py).
 It defines a new `@cached_property`:
 
 ```python
@@ -129,13 +130,13 @@ them and see what is used where.
 To see the new example in action, change the line
 
 ```python
-from sample.application_context import AppContext
+from tutorial.application_context import AppContext
 ```
 
-in your copy of [`main.py`](src/main/python/sample/main.py) to
+in your copy of [`main.py`](src/main/python/tutorial/main.py) to
 
 ```python
-from sample.application_context_2 import AppContext
+from tutorial.application_context_2 import AppContext
 ```
 
 Then, run `python -m fbs run` again. You will be rewarded ;-)
