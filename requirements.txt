@@ -1,3 +1,3 @@
-fbs==0.0.4
+fbs==0.0.5
 PyQt5==5.9.2
 PyInstaller==3.3.1
