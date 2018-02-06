@@ -191,13 +191,13 @@ features:
 
 ### Mac installer
 To create an installer on Mac, run `python -m fbs installer`. This creates the
-file `target/Tutorial.dmg`, which your users can use to install the app. It
-looks as follows:
+file `target/Tutorial.dmg`, which can be used to install the app. When your
+users open it, it looks as follows:
 
 ![Screenshot of installer on Mac](screenshots/installer-mac.png)
 
-When your users drag your app into the _Applications_ folder also displayed in
-the screenshot, your app is installed.
+To install your app, your users simply drag it into the _Applications_ folder
+also displayed in the screenshot.
 
 ## Up next...
 As of Dec 20, 2017, this tutorial is a work in progress. Still to come:
