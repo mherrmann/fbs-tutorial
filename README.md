@@ -28,7 +28,7 @@ Run the sample app:
 
 This shows a (admittedly not very exciting) window:
 
-![Screenshot of sample app](screenshot.png)
+![Screenshot of sample app](screenshots/app.png)
 
 To compile the app to a standalone executable:
 
@@ -170,6 +170,34 @@ searches the following locations:
 
 If it can't find the file in any of these folders, it falls back to
 `src/main/resources/base`.
+
+## Creating an installer
+To distribute your app to your users, you need an installer. On Windows, this
+is a `MyAppSetup.exe` file. On Mac, it's `MyApp.dmg`. fbs lets you generate both
+of these files with the command `python -m fbs installer`.
+
+### Windows installer
+To create an installer on Windows, you first need to install
+[NSIS](http://nsis.sourceforge.net/Main_pate). Then, please add NSIS'
+installation directory to your `PATH` environment variable.
+
+Once you have completed the above steps, run `python -m fbs installer`. This
+creates an installer at `target/TutorialSetup.exe`. It has the following
+features:
+
+ * It lets your users pick the installation directory.
+ * It creates an entry for your app in the Start Menu.
+ * It adds your app to the list of installed programs. The user can uninstall your app from there.
+
+### Mac installer
+To create an installer on Mac, run `python -m fbs installer`. This creates the
+file `target/Tutorial.dmg`, which your users can use to install the app. It
+looks as follows:
+
+![Screenshot of installer on Mac](screenshots/installer-mac.png)
+
+When your users drag your app into the _Applications_ folder also displayed in
+the screenshot, your app is installed.
 
 ## Up next...
 As of Dec 20, 2017, this tutorial is a work in progress. Still to come:
