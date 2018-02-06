@@ -57,9 +57,9 @@ directory to your `PATH` environment variable. Then, you can run the command
 
 The following screenshots show this:
 
-![Windows install screen 1](screenshots/installer-windows-1.png | height=160) ![Windows install screen 2](screenshots/installer-windows-2.png | height=160) ![Windows install screen 3](screenshots/installer-windows-3.png | height=160) ![Windows install screen 1](screenshots/installer-windows-4.png | height=160)
+<img src="screenshots/installer-windows-1.png" height="160"> <img src="screenshots/installer-windows-2.png" height="160"> <img src="screenshots/installer-windows-3.png" height="160"> <img src="screenshots/installer-windows-4.png" height="160">
 
-![Installed app in Windows Control Panel](screenshots/uninstaller-windows-1.png | height=160) ![Windows uninstall screen 1](screenshots/uninstaller-windows-2.png | height=160) ![Windows uninstall screen 2](screenshots/uninstaller-windows-3.png | height=160)
+<img src="screenshots/uninstaller-windows-1.png" height="160"> <img src="screenshots/uninstaller-windows-2.png" height="160"> <img src="screenshots/uninstaller-windows-3.png" height="160">
 
 ### Mac installer
 To create an installer on Mac, run `python -m fbs installer`. This creates the
