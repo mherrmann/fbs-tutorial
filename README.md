@@ -38,13 +38,13 @@ This shows a (admittedly not very exciting) window:
 ![Screenshot of sample app](screenshots/app.png)
 
 ## Freezing your app
-Running the app as in the previous section requires Python to be installed and
-set up as in the introduction. We don't want to force your users to have to do
-this. What we want is to create a standalone form of your app that can be run on
-other computers. In the context of Python applications, this process is called
-"freezing".
+Running the app from source requires Python to be installed and set up as in the
+introduction. We don't want to force your users to have to do this. Instead, we
+want to create a standalone form of your app that runs on your users' computers.
+In the context of Python applications, this process is called "freezing".
 
-Use the following command to create a standalone executable for your app:
+Use the following command to turn your app's source code into a standalone
+executable:
 
     python -m fbs freeze
 
@@ -55,25 +55,20 @@ awesome?
 ## Creating an installer
 Desktop applications are normally distributed by means of an installer.
 On Windows, this would be an executable called `TutorialSetup.exe`.
-On Mac, mountable disk images such as `Tutorial.dmg` are common.
+On Mac, mountable disk images such as `Tutorial.dmg` are commonly used.
 fbs lets you generate both of these files.
 
 ### Windows installer
 To create an installer on Windows, please first install
 [NSIS](http://nsis.sourceforge.net/Main_Page) and add its directory to your
-`PATH` environment variable. Then, you can run the following command to create
-an installer:
+`PATH` environment variable. Then, you can run the following command:
 
     python -m fbs installer
 
-This creates creates the file `target/TutorialSetup.exe`. When run, it:
-
- * lets your users pick the installation directory
- * creates an entry for your app in the Start Menu
- * adds your app to Windows' list of installed programs.
-   Users can uninstall your app from there.
-
-The following screenshots show this in action:
+This creates an installer at `target/TutorialSetup.exe`. It lets your users pick
+the installation directory and adds your app to the Start Menu. It also creates
+an entry in Windows' list of installed programs. Your users can use this to
+uninstall your app. The following screenshots show these steps in action.
 
 <img src="screenshots/installer-windows-1.png" height="160"> <img src="screenshots/installer-windows-2.png" height="160"> <img src="screenshots/installer-windows-3.png" height="160"> <img src="screenshots/installer-windows-4.png" height="160">
 
