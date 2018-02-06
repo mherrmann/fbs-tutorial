@@ -178,7 +178,7 @@ of these files with the command `python -m fbs installer`.
 
 ### Windows installer
 To create an installer on Windows, you first need to install
-[NSIS](http://nsis.sourceforge.net/Main_pate). Then, please add NSIS'
+[NSIS](http://nsis.sourceforge.net/Main_Page). Then, please add NSIS'
 installation directory to your `PATH` environment variable.
 
 Once you have completed the above steps, run `python -m fbs installer`. This
