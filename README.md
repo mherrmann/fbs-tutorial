@@ -75,12 +75,12 @@ uninstall your app. The following screenshots show these steps in action.
 <img src="screenshots/uninstaller-windows-1.png" height="160"> <img src="screenshots/uninstaller-windows-2.png" height="160"> <img src="screenshots/uninstaller-windows-3.png" height="160">
 
 ### Mac installer
-Creating an installer on Mac is done in fbs with the same command as on Windows:
+Creating an installer on Mac is done with the same command as on Windows:
 
     python -m fbs installer
 
 This creates the file `target/Tutorial.dmg` for distribution to your users.
-Upon opening it, they following volume is displayed:
+Upon opening it, the following volume is displayed:
 
 ![Screenshot of installer on Mac](screenshots/installer-mac.png)
 
@@ -88,7 +88,7 @@ To install your app, your users simply drag its icon to the _Applications_
 folder (also shown in the volume).
 
 ## Source code of the sample app
-The source code for the above app is in
+The source code for the sample app is in
 [`src/main/python`](src/main/python/tutorial). It contains a
 [`main.py` script](src/main/python/tutorial/main.py), which serves as the entry
 point for the application:
@@ -159,7 +159,6 @@ Here's how it is used:
 ```python
 class AppContext(ApplicationContext):
     ...
-    @cached_property
     def main_window(self):
         ...
         image_container.setPixmap(self.image)
@@ -170,11 +169,11 @@ above is executed. After that, the value is cached and returned without
 executing the code again.
 
 `@cached_property` is extremely useful for instantiating and connecting the
-Python objects that make up your application. For each component, define a
-`@cached_property`. If it requires other objects, simply access them as
-properties, like `self.image` above. The fact that all parts of your application
-live in one place (the application context) makes it extremely easy to manage
-them and see what is used where.
+Python objects that make up your application. Define a `@cached_property` for
+each component (a window, a database connection, etc.). If it requires other
+objects, access them as properties, like `self.image` above. The fact that all
+parts of your application live in one place (the application context) makes it
+extremely easy to manage them and see what is used where.
 
 To see the new example in action, change the line
 
@@ -221,9 +220,9 @@ If it can't find the file in any of these folders, it falls back to
 `src/main/resources/base`.
 
 ## Up next...
-As of Dec 20, 2017, this tutorial is a work in progress. Still to come:
+As of February 2018, this tutorial is a work in progress. Still to come:
 
- * Creating an installer for your app
+ * Creating an installer for Ubuntu (Linux)
  * Codesigning so your users don't get ugly "app is untrusted" messages
  * Automatic updates
 
