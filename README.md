@@ -189,6 +189,12 @@ features:
  * It creates an entry for your app in the Start Menu.
  * It adds your app to the list of installed programs. The user can uninstall your app from there.
 
+The following two screenshots show this:
+
+![Screenshot of installation wizard on Windows](screenshots/installer-windows.png)
+
+![Screenshot of uninstaller on Windows](screenshots/uninstaller-windows.png)
+
 ### Mac installer
 To create an installer on Mac, run `python -m fbs installer`. This creates the
 file `target/Tutorial.dmg`, which can be used to install the app. When your
