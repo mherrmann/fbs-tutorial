@@ -8,7 +8,7 @@ This tutorial is meant for Windows, Mac and Ubuntu. You need
 the Zip file of this repository and extract it. Then, open a command prompt
 and `cd` into it:
 
-    cd path/to/fbs-tutorial-master
+    cd .../path/to/fbs-tutorial-master
 
 Create a virtual environment:
 
@@ -22,15 +22,14 @@ Activate the virtual environment:
     call venv\scripts\activate.bat
 
 The remainder of the tutorial assumes that the virtual environment is active.
-You can verify this is the case by the prefix `(venv)` on your command prompt.
 
 Install the required libraries (most notably, `fbs` and `PyQt5`):
 
     pip install -r requirements.txt
 
 ## Run the app
-The [`src` directory](src) in this repository contains the source code of a
-sample application. To run it from source, execute the following command:
+This repository contains a sample application. To run it from source, execute
+the following command:
 
     python -m fbs run
 
@@ -39,10 +38,13 @@ This shows a (admittedly not very exciting) window:
 ![Screenshot of sample app](screenshots/app.png)
 
 ## Freezing your app
-Running the app from source requires Python to be installed. The process of
-turning the source code into a standalone application that does not require
-Python to be installed is called "freezing". fbs lets you freeze an app via
-the command:
+Running the app as in the previous section requires Python to be installed and
+set up as in the introduction. We don't want to force your users to have to do
+this. What we want is to create a standalone form of your app that can be run on
+other computers. In the context of Python applications, this process is called
+"freezing".
+
+Use the following command to create a standalone executable for your app:
 
     python -m fbs freeze
 
@@ -51,37 +53,44 @@ other computer (with the same OS as yours) and run your app there! Isn't that
 awesome?
 
 ## Creating an installer
-You normally don't distribute your app as a folder, but via an installer.
-On Windows, this is typically an executable called `TutorialSetup.exe`.
-On Mac, a common solution are mountable disk images such as `Tutorial.dmg`.
-Both of these files can be generated with fbs.
+Desktop applications are normally distributed by means of an installer.
+On Windows, this would be an executable called `TutorialSetup.exe`.
+On Mac, mountable disk images such as `Tutorial.dmg` are common.
+fbs lets you generate both of these files.
 
 ### Windows installer
 To create an installer on Windows, please first install
-[NSIS](http://nsis.sourceforge.net/Main_Page) and add its installation
-directory to your `PATH` environment variable. Then, you can run the command
-`python -m fbs installer`. This creates an installer at
-`target/TutorialSetup.exe`. It has the following features:
+[NSIS](http://nsis.sourceforge.net/Main_Page) and add its directory to your
+`PATH` environment variable. Then, you can run the following command to create
+an installer:
 
- * It lets your users pick the installation directory.
- * It creates an entry for your app in the Start Menu.
- * It adds your app to Windows' list of installed programs. The user can uninstall your app there.
+    python -m fbs installer
 
-This is shown in the following screenshots:
+This creates creates the file `target/TutorialSetup.exe`. When run, it:
+
+ * lets your users pick the installation directory
+ * creates an entry for your app in the Start Menu
+ * adds your app to Windows' list of installed programs.
+   Users can uninstall your app from there.
+
+The following screenshots show this in action:
 
 <img src="screenshots/installer-windows-1.png" height="160"> <img src="screenshots/installer-windows-2.png" height="160"> <img src="screenshots/installer-windows-3.png" height="160"> <img src="screenshots/installer-windows-4.png" height="160">
 
 <img src="screenshots/uninstaller-windows-1.png" height="160"> <img src="screenshots/uninstaller-windows-2.png" height="160"> <img src="screenshots/uninstaller-windows-3.png" height="160">
 
 ### Mac installer
-Creating an installer on Mac is done in fbs with the same command as on Windows,
-`python -m fbs installer`. This creates the file `target/Tutorial.dmg`, which
-you can distribute to your users. Upon opening it, they see the following volume:
+Creating an installer on Mac is done in fbs with the same command as on Windows:
+
+    python -m fbs installer
+
+This creates the file `target/Tutorial.dmg` for distribution to your users.
+Upon opening it, they following volume is displayed:
 
 ![Screenshot of installer on Mac](screenshots/installer-mac.png)
 
-To install your app, your users simply drag it into the _Applications_ folder
-(which is also shown in the volume).
+To install your app, your users simply drag its icon to the _Applications_
+folder (also shown in the volume).
 
 ## Source code of the sample app
 The source code for the above app is in
