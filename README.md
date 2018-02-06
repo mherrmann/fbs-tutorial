@@ -55,11 +55,11 @@ directory to your `PATH` environment variable. Then, you can run the command
  * It creates an entry for your app in the Start Menu.
  * It adds your app to the list of installed programs. The user can uninstall your app from there.
 
-The following two screenshots show this:
+The following screenshots show this:
 
-![Screenshot of installation wizard on Windows](screenshots/installer-windows.png)
+![Windows install screen 1](screenshots/installer-windows-1.png | height=160) ![Windows install screen 2](screenshots/installer-windows-2.png | height=160) ![Windows install screen 3](screenshots/installer-windows-3.png | height=160) ![Windows install screen 1](screenshots/installer-windows-4.png | height=160)
 
-![Screenshot of uninstaller on Windows](screenshots/uninstaller-windows.png)
+![Installed app in Windows Control Panel](screenshots/uninstaller-windows-1.png | height=160) ![Windows uninstall screen 1](screenshots/uninstaller-windows-2.png | height=160) ![Windows uninstall screen 2](screenshots/uninstaller-windows-3.png | height=160)
 
 ### Mac installer
 To create an installer on Mac, run `python -m fbs installer`. This creates the
