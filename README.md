@@ -219,6 +219,21 @@ searches the following locations:
 If it can't find the file in any of these folders, it falls back to
 `src/main/resources/base`.
 
+## Working with an IDE
+
+So you'd like to launch the app using your IDE and use your IDE's debuging
+support?
+
+Just use the `launch.py` script as a launcher for the application.
+
+Example run configuration for JetBrains PyCharm:
+
+![Screenshot of PyCharm run configuration](screenshots/pycharm-run-configuration.png)
+
+Note: make sure that the working directory of the script is the root
+directory of this repo!
+
+
 ## Up next...
 As of February 2018, this tutorial is a work in progress. Still to come:
 
