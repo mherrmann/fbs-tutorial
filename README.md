@@ -33,9 +33,10 @@ the following command:
 
     python -m fbs run
 
-This shows a (admittedly not very exciting) window:
+This shows a (admittedly not very exciting) window. Screenshots on
+Windows/Mac/Ubuntu:
 
-![Screenshot of sample app on Mac](screenshots/app-mac.png) ![Screenshot of sample app on Ubuntu](screenshots/app-ubuntu.png)
+![Screenshot of sample app on Windows](screenshots/app-windows.png) ![Screenshot of sample app on Mac](screenshots/app-mac.png) ![Screenshot of sample app on Ubuntu](screenshots/app-ubuntu.png)
 
 ## Freezing your app
 Running the app from source requires Python to be set up. We don't want your
