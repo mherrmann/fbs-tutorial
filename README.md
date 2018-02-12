@@ -35,7 +35,7 @@ the following command:
 
 This shows a (admittedly not very exciting) window:
 
-![Screenshot of sample app](screenshots/app.png)
+![Screenshot of sample app on Mac](screenshots/app-mac.png) ![Screenshot of sample app on Ubuntu](screenshots/app-ubuntu.png)
 
 ## Freezing your app
 Running the app from source requires Python to be set up. We don't want your
