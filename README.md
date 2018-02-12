@@ -88,10 +88,9 @@ To install your app, your users simply drag its icon to the _Applications_
 folder (also shown in the volume).
 
 ## Source code of the sample app
-The source code for the sample app is in
-[`src/main/python`](src/main/python/tutorial). It contains a
-[`main.py` script](src/main/python/tutorial/main.py), which serves as the entry
-point for the application:
+Let's now take a look at the source code for the sample application. It lies in
+[`src/main/python`](src/main/python/tutorial). The app's entry point is the
+script [`main.py`](src/main/python/tutorial/main.py):
 
 ```python
 from tutorial.application_context import AppContext
