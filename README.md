@@ -218,6 +218,35 @@ searches the following locations:
 If it can't find the file in any of these folders, it falls back to
 `src/main/resources/base`.
 
+## Using an IDE
+The command `python -m fbs run` is great for quick results. Many people however
+prefer working in an IDE such as [PyCharm](https://www.jetbrains.com/pycharm/).
+It especially simplifies debugging.
+
+To run the sample app from other environments (such as an IDE), you simply
+
+ * need the virtual environment to be active,
+ * have `src/main/python` on your `PYTHONPATH` and
+ * run `src/main/python/tutorial/main.py`.
+
+So for example on Mac and Linux, you can also run the app via
+
+    PYTHONPATH=src/main/python python src/main/python/tutorial/main.py
+
+(assuming the virtual environment is active).
+
+Here are screenshots of how PyCharm can be configured to run your app:
+
+<img src="screenshots/pycharm-config-1.png" height="160"> <img src="screenshots/pycharm-config-2.png" height="160"> <img src="screenshots/pycharm-config-3.png" height="160">
+
+## Dependencies
+At some point during the development of your application, you will most likely
+want to include other libraries. Doing this with fbs is very simple: Just
+install the library with `pip` and use it in your code. fbs automatically
+packages it with your app when you run `python -m fbs freeze`. (This is achieved
+with [PyInstaller](http://www.pyinstaller.org/), which fman uses under the
+hood).
+
 ## Up next...
 As of February 2018, this tutorial is a work in progress. Still to come:
 
