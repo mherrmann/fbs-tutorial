@@ -39,10 +39,9 @@ Windows/Mac/Ubuntu:
 ![Screenshot of sample app on Windows](screenshots/app-windows.png) ![Screenshot of sample app on Mac](screenshots/app-mac.png) ![Screenshot of sample app on Ubuntu](screenshots/app-ubuntu.png)
 
 ## Freezing your app
-Running the app from source requires Python to be set up. We don't want your
-users to have to do this. Instead, we want to create a standalone form of your
-app that runs on your users' computers. In the context of Python applications,
-this process is called "freezing".
+We want to turn the source code of your app into a standalone executable that
+can be run on your users' computers. In the context of Python applications, this
+process is called "freezing".
 
 Use the following command to turn your app's source code into a standalone
 executable:
