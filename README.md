@@ -251,7 +251,7 @@ hood).
 As of February 2018, this tutorial is a work in progress. Still to come:
 
  * Creating an installer for Ubuntu (Linux)
- * Codesigning so your users don't get ugly "app is untrusted" messages
+ * Code signing so your users don't get ugly "app is untrusted" messages
  * Automatic updates
 
 Feel free to share the link to this tutorial! If you are not yet on fbs's
