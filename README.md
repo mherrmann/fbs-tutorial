@@ -248,7 +248,7 @@ with [PyInstaller](http://www.pyinstaller.org/), which fman uses under the
 hood).
 
 ## Up next...
-As of February 2018, this tutorial is a work in progress. Still to come:
+As of June 2018, this tutorial is a work in progress. Still to come:
 
  * Creating an installer for Ubuntu (Linux)
  * Code signing so your users don't get ugly "app is untrusted" messages
@@ -256,4 +256,4 @@ As of February 2018, this tutorial is a work in progress. Still to come:
 
 Feel free to share the link to this tutorial! If you are not yet on fbs's
 mailing list and want to be notified when the tutorial is expanded,
-[sign up here](http://eepurl.com/ddgpnf).
+[sign up here](https://emailoctopus.com/lists/5061ca0f-33e0-11e8-a3c9-06b79b628af2/forms/subscribe).
