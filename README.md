@@ -1,7 +1,7 @@
 # fbs tutorial
 This tutorial is meant for Windows, Mac and Ubuntu. You need
 [Python 3.5](https://www.python.org/downloads/release/python-354/).
-(Later versions may work as well, but are not officially supported.)
+(Later versions have known issues and are not officially supported.)
 
 ## Setup
 [Download](https://github.com/mherrmann/fbs-tutorial/archive/master.zip)
