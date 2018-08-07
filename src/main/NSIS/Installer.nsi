@@ -96,5 +96,6 @@ Section "Uninstall"
 SectionEnd
 
 Function LaunchLink
-  ExecShell "" "$SMPROGRAMS\%{app_name}.lnk"
+  !addplugindir "."
+  ShellExecAsUser::ShellExecAsUser "open" "$SMPROGRAMS\%{app_name}.lnk"
 FunctionEnd
