@@ -1,6 +1,6 @@
 from fbs_runtime.application_context import ApplicationContext, \
     cached_property
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QMainWindow
 
 class AppContext(ApplicationContext):
     def run(self):
