@@ -1,7 +1,7 @@
 # fbs tutorial
 This tutorial is meant for Windows, Mac and Ubuntu. You need
 [Python 3.5](https://www.python.org/downloads/release/python-354/).
-(Later versions have known issues and are not officially supported.)
+(Later versions have known issues and are not yet supported.)
 
 ## Setup
 [Download](https://github.com/mherrmann/fbs-tutorial/archive/master.zip)
@@ -88,61 +88,36 @@ To install your app, your users simply drag its icon to the _Applications_
 folder (also shown in the volume).
 
 ## Source code of the sample app
-Let's now take a look at the source code for the sample application. It lies in
-[`src/main/python`](src/main/python/tutorial). The app's entry point is the
-script [`main.py`](src/main/python/tutorial/main.py):
+Let's now take a look at the source code for the sample application. It is at
+[`src/main/python/main.py`](src/main/python/main.py):
 
 ```python
-from tutorial.application_context import AppContext
+from fbs_runtime.application_context import ApplicationContext
+from PyQt5.QtWidgets import QMainWindow
 
 import sys
 
+class AppContext(ApplicationContext):           # 1. Subclass ApplicationContext
+    def run(self):                              # 2. Implement run()
+        window = QMainWindow()
+        window.setWindowTitle('Hello World!')
+        window.resize(250, 150)
+        window.show()
+        return self.app.exec_()                 # 3. End run() with this line
+
 if __name__ == '__main__':
-    appctxt = AppContext()
-    exit_code = appctxt.run()
+    appctxt = AppContext()                      # 4. Instantiate the subclass
+    exit_code = appctxt.run()                   # 5. Invoke run()
     sys.exit(exit_code)
 ```
 
-The script instantiates and then runs an _application context_. This is defined
-in [`application_context.py`](src/main/python/tutorial/application_context.py):
-
-```python
-from fbs_runtime.application_context import ApplicationContext, \
-    cached_property
-from PyQt5.QtWidgets import QApplication, QMainWindow
-
-class AppContext(ApplicationContext):
-    def run(self):
-        self.main_window.show()
-        return self.app.exec_()
-    @cached_property
-    def main_window(self):
-        result = QMainWindow()
-        result.setWindowTitle('Hello World!')
-        result.resize(250, 150)
-        return result
-```
-
-Your apps should follow the same structure:
-
- * Create a subclass of `fbs_runtime.application_context.ApplicationContext`.
- * Define a `run()` method that ends with `return self.app.exec_()`.
- * Use `@cached_property` to define the objects of your app.
- * In your `main` script, instantiate the application context, invoke its
-   `run()` method and pass the return value to `sys.exit(...)`.
-
-This  may seem complicated at first. But it has several advantages: First, it
-lets `fbs` define useful default behaviour (such as setting the
-[app icon](src/main/icons) or letting you access resource files bundled with
-your app). Also, as your application becomes more complex, you will find that
-an application context is extremely useful for "wiring together" the various
-Python objects that make up your app. The next section demonstrates both of
-these advantages.
+The important steps are highlighted as comments in the code. If they look
+daunting to you, don't worry. They're all that's required. You can see in the
+middle of the code that a window is being created, resized and then shown.
 
 ## A more complicated example
 Take a look at
-[`application_context_2.py`](src/main/python/tutorial/application_context_2.py).
-It defines a new `@cached_property`:
+[`main_2.py`](src/main/python/main_2.py). It defines a `@cached_property`:
 
 ```python
 class AppContext(ApplicationContext):
@@ -152,7 +127,7 @@ class AppContext(ApplicationContext):
         return QPixmap(self.get_resource('success.jpg'))
 ```
 
-A `@cached_property` is simply a Python `@property` whose value is cached.
+You can use `@cached_property` to define the components that make up your app.
 Here's how it is used:
 
 ```python
@@ -163,30 +138,33 @@ class AppContext(ApplicationContext):
         image_container.setPixmap(self.image)
 ```
 
-The first time `self.image` is accessed, the `return QPixmap(...)` code from 
-above is executed. After that, the value is cached and returned without
-executing the code again.
+The way `@cached_property` works is that the first time `self.image` is
+accessed, `return QPixmap(...)` is executed. After that, the value is cached and
+returned without executing the code again.
 
-`@cached_property` is extremely useful for instantiating and connecting the
-Python objects that make up your application. Define a `@cached_property` for
-each component (a window, a database connection, etc.). If it requires other
-objects, access them as properties, like `self.image` above. The fact that all
-parts of your application live in one place (the application context) makes it
-extremely easy to manage them and see what is used where.
+This is extremely useful for instantiating and connecting the Python objects
+that form your app. Define a `@cached_property` for each component (a window, a
+database connection, etc.). If it requires other objects, access them as
+properties, like `self.image` above. The fact that all parts of your application
+live in one place (the application context) makes it extremely easy to manage
+them and see what is used where.
 
-To see the new example in action, change the line
+To see the new example in action, change
 
-```python
-from tutorial.application_context import AppContext
+```
+"main_module": "src/main/python/main.py"
 ```
 
-in your copy of [`main.py`](src/main/python/tutorial/main.py) to
+in your copy of [`base.json`](src/build/settings/base.json) to
 
-```python
-from tutorial.application_context_2 import AppContext
+```
+"main_module": "src/main/python/main_2.py"
 ```
 
 Then, run `python -m fbs run` again. You will be rewarded ;-)
+
+As a final note, it should be said that you don't have to use
+`@cached_property`. It is merely recommended.
 
 ### Resources
 Another feature of our new example was the call
@@ -227,11 +205,11 @@ To run the sample app from other environments (such as an IDE), you simply
 
  * need the virtual environment to be active,
  * have `src/main/python` on your `PYTHONPATH` and
- * run `src/main/python/tutorial/main.py`.
+ * run `src/main/python/main.py`.
 
 So for example on Mac and Linux, you can also run the app via
 
-    PYTHONPATH=src/main/python python src/main/python/tutorial/main.py
+    PYTHONPATH=src/main/python python src/main/python/main.py
 
 (assuming the virtual environment is active).
 
@@ -248,7 +226,7 @@ with [PyInstaller](http://www.pyinstaller.org/), which fman uses under the
 hood).
 
 ## Up next...
-As of June 2018, this tutorial is a work in progress. Still to come:
+As of September 2018, this tutorial is a work in progress. Still to come:
 
  * Creating an installer for Ubuntu (Linux)
  * Code signing so your users don't get ugly "app is untrusted" messages

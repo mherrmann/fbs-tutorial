@@ -1,5 +1,5 @@
 {
     "app_name": "Tutorial",
-    "main_module": "src/main/python/tutorial/main.py",
+    "main_module": "src/main/python/main.py",
     "author": "fbs"
 }
