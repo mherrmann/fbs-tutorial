@@ -196,10 +196,11 @@ def window(self):
     return MainWindow()
 ```
 
-You can use `@cached_property` to define the components that make up your app.
-The way it works is that the first time `self.window` is accessed,
-`return MainWindow()` is executed. Further accesses then cache the value and
-return it without re-executing the code.
+You can use
+[`@cached_property`](https://build-system.fman.io/manual/#cached_property) to
+define the components that make up your app. The way it works is that the first
+time `self.window` is accessed, `return MainWindow()` is executed. Further
+accesses then cache the value and return it without re-executing the code.
 
 The above approach is extremely useful: In your `ApplicationContext`, define a
 `@cached_property` for each component (a window, a database connection, etc.).
