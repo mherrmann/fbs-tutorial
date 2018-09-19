@@ -111,127 +111,133 @@ if __name__ == '__main__':
     sys.exit(exit_code)
 ```
 
-The important steps are highlighted as comments in the code. If they look
-daunting to you, don't worry. They're all that's required. You can see in the
-middle of the code that a window is being created, resized and then shown.
+The important steps are highlighted as comments. If they look daunting to you,
+don't worry. They're the only boilerplate that's required. In the middle of the
+code, you can see that a window is being created, resized and then shown.
 
 ## A more complicated example
-Take a look at
-[`main_2.py`](src/main/python/main_2.py). It defines a `@cached_property`:
+We will now create a more interesting example: An app that displays famous
+quotes from the internet. Here's what it looks like:
+
+![Quote app](screenshots/quote-app.png)
+
+Before you can run it, you need to install the Python
+[requests](http://docs.python-requests.org/en/master/) library. To do this,
+type in the following command:
+
+    pip install requests
+
+The source code of the new app lies in [`main_2.py`](src/main/python/main_2.py).
+To tell fbs about this file, please change the `main_module` setting in
+[`base.json`](src/build/settings/base.json) to `"src/main/python/main_2.py"`.
+Then, you can do `python -m fbs run` (or `... freeze` etc.) as before.
+
+The new app uses the following code to fetch quotes from the internet:
+
+```python
+def _get_quote():
+    response = requests.get('https://talaikis.com/api/quotes/random/')
+    return response.json()['quote']
+```
+
+You can see that it uses the `requests` library we just installed above. Feel 
+free to open https://talaikis.com/api/quotes/random/ in the browser to get a
+feel for its data.
+
+The app follows the same basic steps as before. It defines an application
+context with a `run()` method that ends in `return self.app.exec_()`:
 
 ```python
 class AppContext(ApplicationContext):
+    def run(self):
+        ...
+        return self.app.exec_()
     ...
-    @cached_property
-    def image(self):
-        return QPixmap(self.get_resource('success.jpg'))
+```
+
+It then instantiates this application context and invokes `run()`:
+
+```python
+if __name__ == '__main__':
+    appctxt = AppContext()
+    exit_code = appctxt.run()
+    sys.exit(exit_code)
+```
+
+What's different is what happens in between. First, let's look at the 
+implementation of `run()`:
+
+```python
+def run(self):
+    stylesheet = self.get_resource('styles.qss')
+    self.app.setStyleSheet(open(stylesheet).read())
+    self.window.show()
+    return self.app.exec_()
+```
+
+The first line uses
+[`get_resource(...)`](https://build-system.fman.io/manual/#get_resource) to
+obtain the path to [`styles.qss`](src/main/resources/base/styles.qss). This is a
+QSS file, Qt's equivalent to CSS. The next line reads its contents and sets them
+as the stylesheet of `self.app`.
+
+fbs ensures that `get_resource(...)` works both when running from source (i.e.
+during `python -m fbs run`) and when running the compiled form of your app. In
+the former case, the returned path is in
+[`src/main/resources`](src/main/resources/base). In the latter, it will be in
+your app's installation directory. fbs handles the corresponding details
+transparently.
+
+The last but one line accesses `self.window`. This is defined as follows:
+
+```python
+@cached_property
+def window(self):
+    return MainWindow()
 ```
 
 You can use `@cached_property` to define the components that make up your app.
-Here's how it is used:
+The way it works is that the first time `self.window` is accessed,
+`return MainWindow()` is executed. Further accesses then cache the value and
+return it without re-executing the code.
 
-```python
-class AppContext(ApplicationContext):
-    ...
-    def main_window(self):
-        ...
-        image_container.setPixmap(self.image)
-```
+The above approach is extremely useful: In your `ApplicationContext`, define a
+`@cached_property` for each component (a window, a database connection, etc.).
+If it requires other objects, access them as properties. For example, if the
+window requires the database because it displays information from it, then its
+`@cached_property` would access `self.database`. If you connect the parts of
+your application in this centralised way, then it is extremely easy to see how
+they work together.
 
-The way `@cached_property` works is that the first time `self.image` is
-accessed, `return QPixmap(...)` is executed. After that, the value is cached and
-returned without executing the code again.
+The final bit of code is the definition of `MainWindow`. It sets up the text
+field for the quote and the button. When the button is clicked, it changes the
+contents of the text field using `_get_quote()` above. You can find the
+corresponding code in [`main_2.py`](src/main/python/main_2.py).
 
-This is extremely useful for instantiating and connecting the Python objects
-that form your app. Define a `@cached_property` for each component (a window, a
-database connection, etc.). If it requires other objects, access them as
-properties, like `self.image` above. The fact that all parts of your application
-live in one place (the application context) makes it extremely easy to manage
-them and see what is used where.
+As already mentioned, you can use `python -m fbs run` to run the new app. But
+here's what's really cool: You can also do `python -m fbs freeze` and
+`... installer` to distribute it to other computers. fbs includes the `requests`
+dependency and the `styles.qss` file automatically.
 
-To see the new example in action, change
+## Summary
+fbs lets you use Python and Qt to create desktop applications for Windows, Mac
+and Linux. It can create installers for your app, and automatically handles the
+packaging of third-party libraries and data files. By solving these common
+pain points, fbs saves you weeks (if not months) of development time.
 
-```
-"main_module": "src/main/python/main.py"
-```
+## Where to go from here
+fbs's [Manual](https://build-system.fman.io/manual/) explains the technical
+foundation of the steps in this tutorial. Read it to find out more about fbs's
+required directory structure, dependency management, handling of data files,
+custom build commands, API and more.
 
-in your copy of [`base.json`](src/build/settings/base.json) to
-
-```
-"main_module": "src/main/python/main_2.py"
-```
-
-Then, run `python -m fbs run` again. You will be rewarded ;-)
-
-As a final note, it should be said that you don't have to use
-`@cached_property`. It is merely recommended.
-
-### Resources
-Another feature of our new example was the call
-`self.get_resource('success.jpg')`. It loads an image that lives in the folder
-[`src/main/resources`](src/main/resources/base).
-But what if the user is running the compiled form of your app? In that case,
-there is no `src/...`, because the directory structure is completely different.
-
-The answer is that `get_resource(...)` is clever enough to determine whether it
-is running from source, or from the compiled form of your app. To ensure that
-the image is in fact distributed alongside your application, `fbs` copies all
-files from `src/main/resources` into the `target/Tutorial` folder. So, if you
-have data files that you want to include (such as images, `.qss` style sheets -
-Qt's equivalent of `.css` files - etc.) place them in `src/main/resources`.
-
-### Different OSs
-Often, you will want to use different versions of a resource file depending on
-the operating system. A typical example of this are `.qss` files where you
-modify your app's style to match the current OS.
-
-The solution for this is that `get_resource(...)` first looks for a
-platform-specific version of the given file. Depending on the current OS, it
-searches the following locations:
-
- * `src/main/resources/windows`
- * `src/main/resources/mac`
- * `src/main/resources/linux`
-
-If it can't find the file in any of these folders, it falls back to
-`src/main/resources/base`.
-
-## Using an IDE
-The command `python -m fbs run` is great for quick results. Many people however
-prefer working in an IDE such as [PyCharm](https://www.jetbrains.com/pycharm/).
-It especially simplifies debugging.
-
-To run the sample app from other environments (such as an IDE), you simply
-
- * need the virtual environment to be active,
- * have `src/main/python` on your `PYTHONPATH` and
- * run `src/main/python/main.py`.
-
-So for example on Mac and Linux, you can also run the app via
-
-    PYTHONPATH=src/main/python python src/main/python/main.py
-
-(assuming the virtual environment is active).
-
-Here are screenshots of how PyCharm can be configured to run your app:
-
-<img src="screenshots/pycharm-config-1.png" height="160"> <img src="screenshots/pycharm-config-2.png" height="160"> <img src="screenshots/pycharm-config-3.png" height="160">
-
-## Dependencies
-At some point during the development of your application, you will most likely
-want to include other libraries. Doing this with fbs is very simple: Just
-install the library with `pip` and use it in your code. fbs automatically
-packages it with your app when you run `python -m fbs freeze`. (This is achieved
-with [PyInstaller](http://www.pyinstaller.org/), which fman uses under the
-hood).
-
-## Up next...
-As of September 2018, this tutorial is a work in progress. Still to come:
-
- * Creating an installer for Ubuntu (Linux)
- * Code signing so your users don't get ugly "app is untrusted" messages
- * Automatic updates
+If you have not used PyQt before: It's the library that allowed us in the above
+examples to use Qt (a GUI framework) from Python. fbs's contribution is not to
+combine Python and Qt. It's to make it very easy to package and deploy
+PyQt-based apps to your users' computers. For examples of what PyQt can do, take
+a look [here](https://pythonspot.com/pyqt5/) and 
+[here](https://github.com/mfitzp/15-minute-apps). 
 
 Feel free to share the link to this tutorial! If you are not yet on fbs's
-mailing list and want to be notified when the tutorial is expanded,
+mailing list and want to be notified as it evolves,
 [sign up here](https://emailoctopus.com/lists/5061ca0f-33e0-11e8-a3c9-06b79b628af2/forms/subscribe).
