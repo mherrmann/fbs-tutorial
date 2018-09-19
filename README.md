@@ -223,8 +223,8 @@ dependency and the `styles.qss` file automatically.
 ## Summary
 fbs lets you use Python and Qt to create desktop applications for Windows, Mac
 and Linux. It can create installers for your app, and automatically handles the
-packaging of third-party libraries and data files. By solving these common
-pain points, fbs saves you weeks (if not months) of development time.
+packaging of third-party libraries and data files. These things normally take
+weeks to figure out. fbs gives them to you in minutes instead.
 
 ## Where to go from here
 fbs's [Manual](https://build-system.fman.io/manual/) explains the technical
