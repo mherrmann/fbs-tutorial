@@ -134,8 +134,8 @@ type in the following command:
     pip install requests
 
 The source code of the new app consists of two files:
- * [`main.py`](main.py)
- * [`styles.qss`](styles.qss)
+ * [`main.py`](https://raw.githubusercontent.com/mherrmann/fbs-tutorial/master/main.py)
+ * [`styles.qss`](https://raw.githubusercontent.com/mherrmann/fbs-tutorial/master/styles.qss)
 
 Please copy the former over the existing file in `src/main/python/`, and the
 latter into the _new_ directory `src/main/resources/base/`. Once you have done
