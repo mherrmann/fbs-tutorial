@@ -4,13 +4,7 @@ This tutorial is meant for Windows, Mac and Ubuntu. You need
 (Later versions have known issues and are not yet supported.)
 
 ## Setup
-[Download](https://github.com/mherrmann/fbs-tutorial/archive/master.zip)
-the Zip file of this repository and extract it. Then, open a command prompt
-and `cd` into it:
-
-    cd .../path/to/fbs-tutorial-master
-
-Create a virtual environment:
+Create a virtual environment in the current directory:
 
     python3 -m venv venv
 
@@ -25,11 +19,22 @@ The remainder of the tutorial assumes that the virtual environment is active.
 
 Install the required libraries (most notably, `fbs` and `PyQt5`):
 
-    pip install -r requirements.txt
+    pip install fbs PyQt5==5.9.2 PyInstaller==3.3.1
+
+## Start a project
+Execute the following command to start a new fbs project:
+
+    python -m fbs startproject
+
+This asks you a few questions. You can for instance use `Tutorial` as the app
+name, your name as the author and `com.example.tutorial` as the Mac bundle
+identifier.
+
+The command creates a new folder called `src/` in your current directory.
+This folder contains the minimum configuration for a bare-bones PyQt app.
 
 ## Run the app
-This repository contains a sample application. To run it from source, execute
-the following command:
+To run the basic PyQt application from source, execute the following command:
 
     python -m fbs run
 
@@ -38,18 +43,47 @@ Windows/Mac/Ubuntu:
 
 ![Screenshot of sample app on Windows](screenshots/app-windows.png) ![Screenshot of sample app on Mac](screenshots/app-mac.png) ![Screenshot of sample app on Ubuntu](screenshots/app-ubuntu.png)
 
-## Freezing your app
-We want to turn the source code of your app into a standalone executable that
-can be run on your users' computers. In the context of Python applications, this
+## Source code of the sample app
+Let's now take a look at the source code of the PyQt app that was generated.
+It is at
+[`src/main/python/main.py`](https://github.com/mherrmann/fbs/blob/master/fbs/builtin_commands/project_template/src/main/python/main.py):
+
+```python
+from fbs_runtime.application_context import ApplicationContext
+from PyQt5.QtWidgets import QMainWindow
+
+import sys
+
+class AppContext(ApplicationContext):           # 1. Subclass ApplicationContext
+    def run(self):                              # 2. Implement run()
+        window = QMainWindow()
+        window.setWindowTitle('Hello World!')
+        window.resize(250, 150)
+        window.show()
+        return self.app.exec_()                 # 3. End run() with this line
+
+if __name__ == '__main__':
+    appctxt = AppContext()                      # 4. Instantiate the subclass
+    exit_code = appctxt.run()                   # 5. Invoke run()
+    sys.exit(exit_code)
+```
+
+The important steps are highlighted as comments. If they look daunting to you,
+don't worry. They're the only boilerplate that's required. In the middle of the
+code, you can see that a window is being created, resized and then shown.
+
+## Freezing the app
+We want to turn the source code of our app into a standalone executable that can
+be run on your users' computers. In the context of Python applications, this
 process is called "freezing".
 
-Use the following command to turn your app's source code into a standalone
+Use the following command to turn the app's source code into a standalone
 executable:
 
     python -m fbs freeze
 
 This creates the folder `target/Tutorial`. You can copy this directory to any
-other computer (with the same OS as yours) and run your app there! Isn't that
+other computer (with the same OS as yours) and run the app there! Isn't that
 awesome?
 
 ## Creating an installer
@@ -87,37 +121,9 @@ Upon opening it, the following volume is displayed:
 To install your app, your users simply drag its icon to the _Applications_
 folder (also shown in the volume).
 
-## Source code of the sample app
-Let's now take a look at the source code for the sample application. It is at
-[`src/main/python/main.py`](src/main/python/main.py):
-
-```python
-from fbs_runtime.application_context import ApplicationContext
-from PyQt5.QtWidgets import QMainWindow
-
-import sys
-
-class AppContext(ApplicationContext):           # 1. Subclass ApplicationContext
-    def run(self):                              # 2. Implement run()
-        window = QMainWindow()
-        window.setWindowTitle('Hello World!')
-        window.resize(250, 150)
-        window.show()
-        return self.app.exec_()                 # 3. End run() with this line
-
-if __name__ == '__main__':
-    appctxt = AppContext()                      # 4. Instantiate the subclass
-    exit_code = appctxt.run()                   # 5. Invoke run()
-    sys.exit(exit_code)
-```
-
-The important steps are highlighted as comments. If they look daunting to you,
-don't worry. They're the only boilerplate that's required. In the middle of the
-code, you can see that a window is being created, resized and then shown.
-
 ## A more complicated example
 We will now create a more interesting example: An app that displays famous
-quotes from the internet. Here's what it looks like:
+quotes from the internet. Here's what it looks like (on Ubuntu):
 
 ![Quote app](screenshots/quote-app.png)
 
@@ -127,10 +133,13 @@ type in the following command:
 
     pip install requests
 
-The source code of the new app lies in [`main_2.py`](src/main/python/main_2.py).
-To tell fbs about this file, please change the `main_module` setting in
-[`base.json`](src/build/settings/base.json) to `"src/main/python/main_2.py"`.
-Then, you can do `python -m fbs run` (or `... freeze` etc.) as before.
+The source code of the new app consists of two files:
+ * [`main.py`](main.py)
+ * [`styles.qss`](styles.qss)
+
+Please copy the former over the existing file in `src/main/python/`, and the
+latter into the _new_ directory `src/main/resources/base/`. Once you have done
+this, you can do `python -m fbs run` (or `... freeze` etc.) as before.
 
 The new app uses the following code to fetch quotes from the internet:
 
@@ -177,16 +186,15 @@ def run(self):
 
 The first line uses
 [`get_resource(...)`](https://build-system.fman.io/manual/#get_resource) to
-obtain the path to [`styles.qss`](src/main/resources/base/styles.qss). This is a
-QSS file, Qt's equivalent to CSS. The next line reads its contents and sets them
-as the stylesheet of `self.app`.
+obtain the path to [`styles.qss`](styles.qss). This is a QSS file, Qt's
+equivalent to CSS. The next line reads its contents and sets them as the
+stylesheet of `self.app`.
 
 fbs ensures that `get_resource(...)` works both when running from source (i.e.
 during `python -m fbs run`) and when running the compiled form of your app. In
-the former case, the returned path is in
-[`src/main/resources`](src/main/resources/base). In the latter, it will be in
-your app's installation directory. fbs handles the corresponding details
-transparently.
+the former case, the returned path is in `src/main/resources`. In the latter, it
+will be in your app's installation directory. fbs handles the corresponding
+details transparently.
 
 The last but one line accesses `self.window`. This is defined as follows:
 
@@ -213,7 +221,7 @@ they work together.
 The final bit of code is the definition of `MainWindow`. It sets up the text
 field for the quote and the button. When the button is clicked, it changes the
 contents of the text field using `_get_quote()` above. You can find the
-corresponding code in [`main_2.py`](src/main/python/main_2.py).
+corresponding code in [`main.py`](main.py).
 
 As already mentioned, you can use `python -m fbs run` to run the new app. But
 here's what's really cool: You can also do `python -m fbs freeze` and
@@ -235,9 +243,8 @@ custom build commands, API and more.
 If you have not used PyQt before: It's the library that allowed us in the above
 examples to use Qt (a GUI framework) from Python. fbs's contribution is not to
 combine Python and Qt. It's to make it very easy to package and deploy
-PyQt-based apps to your users' computers. For examples of what PyQt can do, take
-a look [here](https://pythonspot.com/pyqt5/) and 
-[here](https://github.com/mfitzp/15-minute-apps). 
+PyQt-based apps to your users' computers. For an introduction to PyQt, see
+[here](https://build-system.fman.io/pyqt5-tutorial).
 
 Feel free to share the link to this tutorial! If you are not yet on fbs's
 mailing list and want to be notified as it evolves,

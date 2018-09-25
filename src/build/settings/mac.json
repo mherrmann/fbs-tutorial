@@ -1,6 +1,0 @@
-{
-    "mac_bundle_identifier": "com.example.tutorial",
-    "resources_to_filter": [
-        "src/main/resources/mac-frozen/Contents/Info.plist"
-    ]
-}
