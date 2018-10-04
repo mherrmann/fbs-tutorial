@@ -2,7 +2,7 @@
 This tutorial shows how you can use fbs to create a simple Python GUI and an
 associated installer:
 
-![Screenshot of sample app on Windows](screenshots/app-windows.png) ![Windows installer](screenshots/installer-windows.png)
+![Screenshot of sample app on Windows](screenshots/quote-app.png) ![Windows installer](screenshots/installer-windows.png)
  
 You can follow this tutorial on Windows, Mac or Linux. The only prerequisite is
 Python, [version 3.5](https://www.python.org/downloads/release/python-354/).
@@ -128,7 +128,7 @@ folder (also shown in the volume).
 
 ## A more complicated example
 We will now create a more interesting example: An app that displays famous
-quotes from the internet. Here's what it looks like (on Ubuntu):
+quotes from the internet. Here's what it looks like on Windows:
 
 ![Quote app](screenshots/quote-app.png)
 
