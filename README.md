@@ -1,7 +1,9 @@
 # fbs tutorial
-This tutorial is meant for Windows, Mac and Ubuntu. You need
+This tutorial shows how you can use fbs to create a simple Python GUI and an
+associated installer. You can follow it on Windows, Mac or Linux. The only
+prerequisite is
 [Python 3.5](https://www.python.org/downloads/release/python-354/).
-(Later versions have known issues and are not yet supported.)
+(Other versions have known issues and are not yet supported.)
 
 ## Setup
 Create a virtual environment in the current directory:
