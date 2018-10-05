@@ -32,8 +32,7 @@ Execute the following command to start a new fbs project:
     python -m fbs startproject
 
 This asks you a few questions. You can for instance use `Tutorial` as the app
-name, your name as the author and `com.example.tutorial` as the Mac bundle
-identifier.
+name and your name as the author.
 
 The command creates a new folder called `src/` in your current directory.
 This folder contains the minimum configuration for a bare-bones PyQt app.
