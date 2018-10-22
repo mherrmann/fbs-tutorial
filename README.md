@@ -93,45 +93,56 @@ awesome?
 ## Creating an installer
 Desktop applications are normally distributed by means of an installer.
 On Windows, this would be an executable called `TutorialSetup.exe`.
-On Mac, mountable disk images such as `Tutorial.dmg` are commonly used.
-fbs lets you generate both of these files.
-
-### Windows installer
-To create an installer on Windows, please first install
-[NSIS](http://nsis.sourceforge.net/Main_Page) and add its directory to your
-`PATH` environment variable. Then, you can run the following command:
+On Mac, mountable disk images such as `Tutorial.dmg` are commonly used. Finally
+on Ubuntu, `.deb` files are the de-facto standard. fbs lets you generate each of
+these files via the command:
 
     python -m fbs installer
 
-This creates an installer at `target/TutorialSetup.exe`. It lets your users pick
+### Windows installer
+Before you can use the `installer` command on Windows, please install
+[NSIS](http://nsis.sourceforge.net/Main_Page) and add its installation directory
+to your `PATH` environment variable.
+
+The installer is created at `target/TutorialSetup.exe`. It lets your users pick
 the installation directory and adds your app to the Start Menu. It also creates
 an entry in Windows' list of installed programs. Your users can use this to
-uninstall your app. The following screenshots show these steps in action.
+uninstall your app. The following screenshots show these steps in action:
 
 <img src="screenshots/installer-windows-1.png" height="160"> <img src="screenshots/installer-windows-2.png" height="160"> <img src="screenshots/installer-windows-3.png" height="160"> <img src="screenshots/installer-windows-4.png" height="160">
 
 <img src="screenshots/uninstaller-windows-1.png" height="160"> <img src="screenshots/uninstaller-windows-2.png" height="160"> <img src="screenshots/uninstaller-windows-3.png" height="160">
 
 ### Mac installer
-Creating an installer on Mac is done with the same command as on Windows:
-
-    python -m fbs installer
-
-This creates the file `target/Tutorial.dmg` for distribution to your users.
-Upon opening it, the following volume is displayed:
+On Mac, the `installer` command generates the file `target/Tutorial.dmg`. When
+your users open it, they see the following volume:
 
 ![Screenshot of installer on Mac](screenshots/installer-mac.png)
 
 To install your app, your users simply drag its icon to the _Applications_
 folder (also shown in the volume).
 
-## A more complicated example
-We will now create a more interesting example: An app that displays famous
-quotes from the internet. Here's what it looks like on Windows:
+### Ubuntu installer
+On Ubuntu, the `installer` command requires that you have
+[fpm](https://github.com/jordansissel/fpm). You can for instance follow
+[these instructions](https://fpm.readthedocs.io/en/latest/installing.html) to
+install it.
+
+fbs creates the Ubuntu installer at `target/Tutorial.deb`. Your users can use
+this to install your app via the command:
+
+    sudo dpkg -i Tutorial.deb
+
+## A more interesting example
+We will now create a more powerful example. Here's what it looks like on
+Windows:
 
 ![Quote app](screenshots/quote-app.png)
 
-Before you can run it, you need to install the Python
+When you click on the button in the window, a new quote is fetched from the
+internet and displayed above.
+
+Before you can run this example, you need to install the Python
 [requests](http://docs.python-requests.org/en/master/) library. To do this,
 type in the following command:
 
@@ -154,8 +165,9 @@ def _get_quote():
 ```
 
 You can see that it uses the `requests` library we just installed above. Feel 
-free to open https://talaikis.com/api/quotes/random/ in the browser to get a
-feel for its data.
+free to open
+[talaikis.com/api/quotes/random](https://talaikis.com/api/quotes/random/) in the
+browser to get a feel for its data.
 
 The app follows the same basic steps as before. It defines an application
 context with a `run()` method that ends in `return self.app.exec_()`:
@@ -214,7 +226,7 @@ define the components that make up your app. The way it works is that the first
 time `self.window` is accessed, `return MainWindow()` is executed. Further
 accesses then cache the value and return it without re-executing the code.
 
-The above approach is extremely useful: In your `ApplicationContext`, define a
+This approach is extremely powerful: In your `ApplicationContext`, define a
 `@cached_property` for each component (a window, a database connection, etc.).
 If it requires other objects, access them as properties. For example, if the
 window requires the database because it displays information from it, then its
@@ -225,7 +237,7 @@ they work together.
 The final bit of code is the definition of `MainWindow`. It sets up the text
 field for the quote and the button. When the button is clicked, it changes the
 contents of the text field using `_get_quote()` above. You can find the
-corresponding code in [`main.py`](main.py).
+full code in [`main.py`](main.py).
 
 As already mentioned, you can use `python -m fbs run` to run the new app. But
 here's what's really cool: You can also do `python -m fbs freeze` and
