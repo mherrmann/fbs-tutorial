@@ -122,16 +122,15 @@ your users open it, they see the following volume:
 To install your app, your users simply drag its icon to the _Applications_
 folder (also shown in the volume).
 
-### Ubuntu installer
-On Ubuntu, the `installer` command requires that you have
+### Linux installer
+On Linux, the `installer` command requires that you have
 [fpm](https://github.com/jordansissel/fpm). You can for instance follow
 [these instructions](https://fpm.readthedocs.io/en/latest/installing.html) to
 install it.
 
-fbs creates the Ubuntu installer at `target/Tutorial.deb`. Your users can use
-this to install your app via the command:
-
-    sudo dpkg -i Tutorial.deb
+Depending on your Linux distribution, fbs creates the installer at 
+`target/Tutorial.deb`, `...pkg.tar.xz` or `...rpm`. Your users can use these
+files to install your app with their respective package manager.
 
 ## A more interesting example
 We will now create a more powerful example. Here's what it looks like on
