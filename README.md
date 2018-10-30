@@ -6,7 +6,7 @@ associated installer:
  
 You can follow this tutorial on Windows, Mac or Linux. The only prerequisite is
 Python, [version 3.5](https://www.python.org/downloads/release/python-354/).
-**Later versions have known issues and are not yet supported.**
+**Later versions have known issues.** Use them at your own risk.
 
 ## Setup
 Create a virtual environment in the current directory:
