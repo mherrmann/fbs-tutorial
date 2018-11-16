@@ -28,7 +28,7 @@ Install the required libraries (most notably, `fbs` and `PyQt5`):
 
 You can also use Qt for Python instead of PyQt. To do this, simply write
 `PySide2` instead of `PyQt5` throughout this tutorial. For the above, use
-`pip install PySide2` (without specifying a version).
+`pip install PySide2==5.11.2`.
 
 ## Start a project
 Execute the following command to start a new fbs project:
@@ -156,8 +156,12 @@ The source code of the new app consists of two files:
  * [`styles.qss`](https://raw.githubusercontent.com/mherrmann/fbs-tutorial/master/styles.qss)
 
 Please copy the former over the existing file in `src/main/python/`, and the
-latter into the _new_ directory `src/main/resources/base/`. Once you have done
-this, you can do `python -m fbs run` (or `... freeze` etc.) as before.
+latter into the _new_ directory `src/main/resources/base/`. If you are using
+PySide2 instead of PyQt, you have to replace all occurrences of `PyQt5` in
+`main.py` by `PySide2`.
+
+Once you have followed these steps, you can do `python -m fbs run` (or
+`... freeze` etc.) as before.
 
 The new app uses the following code to fetch quotes from the internet:
 
