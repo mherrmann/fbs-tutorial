@@ -24,7 +24,7 @@ The remainder of the tutorial assumes that the virtual environment is active.
 
 Install the required libraries (most notably, `fbs` and `PyQt5`):
 
-    pip install fbs PyQt5==5.9.2 PyInstaller==3.3.1
+    pip install fbs PyQt5==5.9.2 PyInstaller==3.4
 
 You can also use Qt for Python instead of PyQt. To do this, simply write
 `PySide2` instead of `PyQt5` throughout this tutorial. For the above, use
