@@ -32,7 +32,7 @@ You can also use Qt for Python instead of PyQt. To do this, simply write
 ## Start a project
 Execute the following command to start a new fbs project:
 
-    python -m fbs startproject
+    fbs startproject
 
 This asks you a few questions. You can for instance use `Tutorial` as the app
 name and your name as the author.
@@ -43,7 +43,7 @@ This folder contains the minimum configuration for a bare-bones PyQt app.
 ## Run the app
 To run the basic PyQt application from source, execute the following command:
 
-    python -m fbs run
+    fbs run
 
 This shows a (admittedly not very exciting) window. Screenshots on
 Windows/Mac/Ubuntu:
@@ -87,7 +87,7 @@ process is called "freezing".
 Use the following command to turn the app's source code into a standalone
 executable:
 
-    python -m fbs freeze
+    fbs freeze
 
 This creates the folder `target/Tutorial`. You can copy this directory to any
 other computer (with the same OS as yours) and run the app there! Isn't that
@@ -100,7 +100,7 @@ On Mac, mountable disk images such as `Tutorial.dmg` are commonly used. Finally
 on Ubuntu, `.deb` files are the de-facto standard. fbs lets you generate each of
 these files via the command:
 
-    python -m fbs installer
+    fbs installer
 
 ### Windows installer
 Before you can use the `installer` command on Windows, please install
@@ -159,8 +159,8 @@ latter into the _new_ directory `src/main/resources/base/`. If you are using
 PySide2 instead of PyQt, you have to replace all occurrences of `PyQt5` in
 `main.py` by `PySide2`.
 
-Once you have followed these steps, you can do `python -m fbs run` (or
-`... freeze` etc.) as before.
+Once you have followed these steps, you can do `fbs run` (or `fbs freeze` etc.)
+as before.
 
 The new app uses the following code to fetch quotes from the internet:
 
@@ -213,10 +213,10 @@ equivalent to CSS. The next line reads its contents and sets them as the
 stylesheet of `self.app`.
 
 fbs ensures that `get_resource(...)` works both when running from source (i.e.
-during `python -m fbs run`) and when running the compiled form of your app. In
-the former case, the returned path is in `src/main/resources`. In the latter, it
-will be in your app's installation directory. fbs handles the corresponding
-details transparently.
+during `fbs run`) and when running the compiled form of your app. In the former
+case, the returned path is in `src/main/resources`. In the latter, it will be in
+your app's installation directory. fbs handles the corresponding details
+transparently.
 
 The last but one line accesses `self.window`. This is defined as follows:
 
@@ -245,10 +245,10 @@ field for the quote and the button. When the button is clicked, it changes the
 contents of the text field using `_get_quote()` above. You can find the
 full code in [`main.py`](main.py).
 
-As already mentioned, you can use `python -m fbs run` to run the new app. But
-here's what's really cool: You can also do `python -m fbs freeze` and
-`... installer` to distribute it to other computers. fbs includes the `requests`
-dependency and the `styles.qss` file automatically.
+As already mentioned, you can use `fbs run` to run the new app. But here's
+what's really cool: You can also do `fbs freeze` and `fbs installer` to
+distribute it to other computers. fbs includes the `requests` dependency and the
+`styles.qss` file automatically.
 
 ## Summary
 fbs lets you use Python and Qt to create desktop applications for Windows, Mac
