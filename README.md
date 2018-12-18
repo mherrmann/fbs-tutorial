@@ -27,7 +27,7 @@ Install the required libraries (most notably, `fbs` and `PyQt5`):
 
 You can also use Qt for Python instead of PyQt. To do this, simply write
 `PySide2` instead of `PyQt5` throughout this tutorial. For the above, use
-`pip install PySide2==5.11.2`.
+`pip install PySide2==5.12.0`.
 
 ## Start a project
 Execute the following command to start a new fbs project:
