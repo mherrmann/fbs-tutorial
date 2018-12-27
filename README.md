@@ -142,7 +142,8 @@ Windows:
 ![Quote app](screenshots/quote-app.png)
 
 When you click on the button in the window, a new quote is fetched from the
-internet and displayed above.
+internet and displayed above. The quotes are taken from a
+[public database](https://github.com/bmc/fortunes).
 
 Before you can run this example, you need to install the Python
 [requests](http://docs.python-requests.org/en/master/) library. To do this,
@@ -166,13 +167,12 @@ The new app uses the following code to fetch quotes from the internet:
 
 ```python
 def _get_quote():
-    response = requests.get('https://talaikis.com/api/quotes/random/')
-    return response.json()['quote']
+    return requests.get('https://build-system.fman.io/quote').text
 ```
 
 You can see that it uses the `requests` library we just installed above. Feel 
 free to open
-[talaikis.com/api/quotes/random](https://talaikis.com/api/quotes/random/) in the
+[build-system.fman.io/quote](https://build-system.fman.io/quote) in the
 browser to get a feel for its data.
 
 The app follows the same basic steps as before. It defines an application

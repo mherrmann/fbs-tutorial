@@ -29,8 +29,7 @@ class MainWindow(QWidget):
         self.setLayout(layout)
 
 def _get_quote():
-    response = requests.get('https://talaikis.com/api/quotes/random/')
-    return response.json()['quote']
+    return requests.get('https://build-system.fman.io/quote').text
 
 if __name__ == '__main__':
     appctxt = AppContext()
