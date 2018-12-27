@@ -142,8 +142,7 @@ Windows:
 ![Quote app](screenshots/quote-app.png)
 
 When you click on the button in the window, a new quote is fetched from the
-internet and displayed above. The quotes are taken from a
-[public database](https://github.com/bmc/fortunes).
+internet and displayed above.
 
 Before you can run this example, you need to install the Python
 [requests](http://docs.python-requests.org/en/master/) library. To do this,
@@ -173,7 +172,8 @@ def _get_quote():
 You can see that it uses the `requests` library we just installed above. Feel 
 free to open
 [build-system.fman.io/quote](https://build-system.fman.io/quote) in the
-browser to get a feel for its data.
+browser to get a feel for what it returns. Its data comes from a
+[public database](https://github.com/bmc/fortunes).
 
 The app follows the same basic steps as before. It defines an application
 context with a `run()` method that ends in `return self.app.exec_()`:
