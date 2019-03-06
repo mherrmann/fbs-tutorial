@@ -25,6 +25,8 @@ Install the required libraries (most notably, `fbs` and `PyQt5`):
 
     pip install fbs PyQt5==5.9.2 PyInstaller==3.4
 
+(If this produces errors, try `pip install wheel` first.)
+
 You can also use Qt for Python instead of PyQt. To do this, simply write
 `PySide2` instead of `PyQt5` throughout this tutorial. For the above, use
 `pip install PySide2==5.12.0`.
@@ -96,11 +98,16 @@ awesome?
 ## Creating an installer
 Desktop applications are normally distributed by means of an installer.
 On Windows, this would be an executable called `TutorialSetup.exe`.
-On Mac, mountable disk images such as `Tutorial.dmg` are commonly used. Finally
-on Ubuntu, `.deb` files are the de-facto standard. fbs lets you generate each of
-these files via the command:
+On Mac, mountable disk images such as `Tutorial.dmg` are commonly used.
+On Linux, `.deb` files are common on Ubuntu, `.rpm` on Fedora / CentOS, and
+`.pkg.tar.xz` on Arch.
+
+fbs lets you generate each of the above packages via the command:
 
     fbs installer
+
+Depending on your operating system, this may require you to first install some
+tools. Please read on for OS-specific instructions.
 
 ### Windows installer
 Before you can use the `installer` command on Windows, please install
