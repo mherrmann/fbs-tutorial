@@ -5,7 +5,8 @@ associated installer:
 ![Screenshot of sample app on Windows](screenshots/quote-app.png) ![Windows installer](screenshots/installer-windows.png)
  
 You can follow this tutorial on Windows, Mac or Linux. The only prerequisite is
-Python 3.5 or 3.6. Python 3.7 is not yet supported and may not work.
+Python 3.5 or 3.6. Python 3.7 is not yet officially supported. It may or may not
+work.
 
 ## Setup
 Create a virtual environment in the current directory:
@@ -23,7 +24,7 @@ The remainder of the tutorial assumes that the virtual environment is active.
 
 Install the required libraries (most notably, `fbs` and `PyQt5`):
 
-    pip install fbs PyQt5==5.9.2 PyInstaller==3.4
+    pip install fbs PyQt5==5.9.2
 
 (If this produces errors, try `pip install wheel` first.)
 
@@ -63,23 +64,19 @@ from PyQt5.QtWidgets import QMainWindow
 
 import sys
 
-class AppContext(ApplicationContext):           # 1. Subclass ApplicationContext
-    def run(self):                              # 2. Implement run()
-        window = QMainWindow()
-        window.setWindowTitle('Hello World!')
-        window.resize(250, 150)
-        window.show()
-        return self.app.exec_()                 # 3. End run() with this line
 
 if __name__ == '__main__':
-    appctxt = AppContext()                      # 4. Instantiate the subclass
-    exit_code = appctxt.run()                   # 5. Invoke run()
+    appctxt = ApplicationContext()       # 1. Instantiate ApplicationContext
+    window = QMainWindow()
+    window.resize(250, 150)
+    window.show()
+    exit_code = appctxt.app.exec_()      # 2. Invoke appctxt.app.exec_()
     sys.exit(exit_code)
 ```
 
-The important steps are highlighted as comments. If they look daunting to you,
-don't worry. They're the only boilerplate that's required. In the middle of the
-code, you can see that a window is being created, resized and then shown.
+The important steps are highlighted as comments. They're the only boilerplate
+that's required. In the middle of the code, you can see that a window is being
+created, resized and then shown.
 
 ## Freezing the app
 We want to turn the source code of our app into a standalone executable that can
@@ -182,42 +179,30 @@ free to open
 browser to get a feel for what it returns. Its data comes from a
 [public database](https://github.com/bmc/fortunes).
 
-The app follows the same basic steps as before. It defines an application
-context with a `run()` method that ends in `return self.app.exec_()`:
+The app follows the same basic steps as before. It instantiates an application
+context and ends by calling `appctxt.app.exec_()`:
 
 ```python
-class AppContext(ApplicationContext):
-    def run(self):
-        ...
-        return self.app.exec_()
-    ...
+appctxt = ApplicationContext()
+...
+exit_code = appctxt.app.exec_()
+sys.exit(exit_code)
 ```
 
-It then instantiates this application context and invokes `run()`:
+What's different is what happens in between:
 
 ```python
-if __name__ == '__main__':
-    appctxt = AppContext()
-    exit_code = appctxt.run()
-    sys.exit(exit_code)
-```
-
-What's different is what happens in between. First, let's look at the 
-implementation of `run()`:
-
-```python
-def run(self):
-    stylesheet = self.get_resource('styles.qss')
-    self.app.setStyleSheet(open(stylesheet).read())
-    self.window.show()
-    return self.app.exec_()
+stylesheet = appctxt.get_resource('styles.qss')
+appctxt.app.setStyleSheet(open(stylesheet).read())
+window = MainWindow()
+window.show()
 ```
 
 The first line uses
 [`get_resource(...)`](https://build-system.fman.io/manual/#get_resource) to
 obtain the path to [`styles.qss`](styles.qss). This is a QSS file, Qt's
 equivalent to CSS. The next line reads its contents and sets them as the
-stylesheet of `self.app`.
+stylesheet of the application context's `.app`.
 
 fbs ensures that `get_resource(...)` works both when running from source (i.e.
 during `fbs run`) and when running the compiled form of your app. In the former
@@ -225,29 +210,7 @@ case, the returned path is in `src/main/resources`. In the latter, it will be in
 your app's installation directory. fbs handles the corresponding details
 transparently.
 
-The last but one line accesses `self.window`. This is defined as follows:
-
-```python
-@cached_property
-def window(self):
-    return MainWindow()
-```
-
-You can use
-[`@cached_property`](https://build-system.fman.io/manual/#cached_property) to
-define the components that make up your app. The way it works is that the first
-time `self.window` is accessed, `return MainWindow()` is executed. Further
-accesses then cache the value and return it without re-executing the code.
-
-This approach is extremely powerful: In your `ApplicationContext`, define a
-`@cached_property` for each component (a window, a database connection, etc.).
-If it requires other objects, access them as properties. For example, if the
-window requires the database because it displays information from it, then its
-`@cached_property` would access `self.database`. If you connect the parts of
-your application in this centralised way, then it is extremely easy to see how
-they work together.
-
-The final bit of code is the definition of `MainWindow`. It sets up the text
+The last but one line instantiates `MainWindow`. This new class sets up the text
 field for the quote and the button. When the button is clicked, it changes the
 contents of the text field using `_get_quote()` above. You can find the
 full code in [`main.py`](main.py).
