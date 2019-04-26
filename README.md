@@ -64,7 +64,6 @@ from PyQt5.QtWidgets import QMainWindow
 
 import sys
 
-
 if __name__ == '__main__':
     appctxt = ApplicationContext()       # 1. Instantiate ApplicationContext
     window = QMainWindow()
