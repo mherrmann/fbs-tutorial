@@ -209,7 +209,7 @@ case, the returned path is in `src/main/resources`. In the latter, it will be in
 your app's installation directory. fbs handles the corresponding details
 transparently.
 
-The last but one line instantiates `MainWindow`. This new class sets up the text
+The next-to-last line instantiates `MainWindow`. This new class sets up the text
 field for the quote and the button. When the button is clicked, it changes the
 contents of the text field using `_get_quote()` above. You can find the
 full code in [`main.py`](main.py).
