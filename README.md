@@ -110,6 +110,21 @@ Before you can use the `installer` command on Windows, please install
 [NSIS](http://nsis.sourceforge.net/Main_Page) and add its installation directory
 to your `PATH` environment variable.
 
+##### To add a directory to the system `PATH`.
+- In start menu search 'edit the system environment variables' and open.
+- Then click 'environment variables' to open the editor.
+- Under System Variables section select 'Path' and click edit.
+- Click 'New' and input the directory and save.
+
+##### Code Signing
+Code signing binaries and installer requires [Microsoft Signtool](https://docs.microsoft.com/en-us/windows/win32/seccrypto/signtool) installed and the installation directory added to the system `Path` otherwise you will have errors like `FileNotFoundError: [WinError 2] The system cannot find the file specified` when trying to sign binaries or the installer.
+
+A lightweight way to install just the signtool is noted below. [Courtesy of Stackoverflow](https://stackoverflow.com/questions/31869552/how-to-install-signtool-exe-for-windows-10/52963704#52963704)
+
+Download the .iso file from https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk The current download link is http://go.microsoft.com/fwlink/p/?LinkID=2022797 . Mount the .iso and install the Installers/Windows SDK Signing Tools-x86_en-us.msi from the mounted ISO.
+
+You will now have the signtool.exe file and companions in 'C:\Program Files (x86)\Windows Kits\10\bin\VERSION\x64'. Version depends on the version installed determined by current ISO. Checking contol panel installed programs will show the version like '10.0.19041.0'. It was '10.0.19041.0' when done with latest. The directory to add to system `Path` would be this 'C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64' for adding signtool.exe to path so `fbs sign` works
+
 The installer is created at `target/TutorialSetup.exe`. It lets your users pick
 the installation directory and adds your app to the Start Menu. It also creates
 an entry in Windows' list of installed programs. Your users can use this to
