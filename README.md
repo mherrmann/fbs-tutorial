@@ -6,7 +6,7 @@ associated installer:
  
 You can follow this tutorial on Windows, Mac or Linux. The only prerequisite is
 Python 3.5 or 3.6. Later Python versions are not yet officially supported. They
-will likely not work.
+probably will not work.
 
 ## Setup
 Create a virtual environment in the current directory:
