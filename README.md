@@ -5,8 +5,8 @@ associated installer:
 ![Screenshot of sample app on Windows](screenshots/quote-app.png) ![Windows installer](screenshots/installer-windows.png)
  
 You can follow this tutorial on Windows, Mac or Linux. The only prerequisite is
-Python 3.5 or 3.6. Python 3.7 is not yet officially supported. It may or may not
-work.
+Python 3.5 or 3.6. Later Python versions are not yet officially supported. They
+will likely not work.
 
 ## Setup
 Create a virtual environment in the current directory:
