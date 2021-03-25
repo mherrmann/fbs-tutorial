@@ -158,7 +158,7 @@ The source code of the new app consists of two files:
 
 Please copy the former over the existing file in `src/main/python/`, and the
 latter into the _new_ directory `src/main/resources/base/`. If you are using
-PySide2 instead of PyQt, you have to replace all occurrences of `PyQt5` in
+PySide instead of PyQt, you have to replace all occurrences of `PyQt5` in
 `main.py` by `PySide2`.
 
 Once you have followed these steps, you can do `fbs run` (or `fbs freeze` etc.)
