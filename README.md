@@ -130,7 +130,7 @@ folder (also shown in the volume).
 ### Linux installer
 On Linux, the `installer` command requires that you have
 [fpm](https://github.com/jordansissel/fpm). You can for instance follow
-[these instructions](https://fpm.readthedocs.io/en/latest/installing.html) to
+[these instructions](https://fpm.readthedocs.io/en/latest/installation.html) to
 install it.
 
 Depending on your Linux distribution, fbs creates the installer at 
