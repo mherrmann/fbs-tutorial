@@ -236,6 +236,4 @@ combine Python and Qt. It's to make it very easy to package and deploy
 PyQt-based apps to your users' computers. For an introduction to PyQt, see
 [here](https://build-system.fman.io/pyqt5-tutorial).
 
-Feel free to share the link to this tutorial! If you are not yet on fbs's
-mailing list and want to be notified as it evolves,
-[sign up here](https://emailoctopus.com/lists/5061ca0f-33e0-11e8-a3c9-06b79b628af2/forms/subscribe).
+Feel free to share the link to this tutorial!
