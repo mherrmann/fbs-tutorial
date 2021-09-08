@@ -2,7 +2,7 @@
 This tutorial shows how you can use fbs to create a simple Python GUI and an
 associated installer:
 
-![Screenshot of sample app on Windows](screenshots/quote-app.png) ![Windows installer](screenshots/installer-windows.png)
+![Screenshot of sample app on Windows](screenshots/quote-app.png) ![Windows installer](screenshots/installer-windows.png) ![Screenshot of installer on Mac](screenshots/installer-mac.png)
  
 You can follow this tutorial on Windows, Mac or Linux.
 You need Python 3.5 or 3.6.
