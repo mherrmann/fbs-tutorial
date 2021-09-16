@@ -1,6 +1,6 @@
 # fbs tutorial
-This tutorial shows how you can use fbs to create a simple Python GUI and an
-associated installer:
+This tutorial shows how you can use [fbs](https://build-system.fman.io) to
+create a simple Python GUI and an associated installer:
 
 ![Screenshot of sample app on Windows](screenshots/quote-app.png) ![Windows installer](screenshots/installer-windows.png) ![Screenshot of installer on Mac](screenshots/installer-mac.png)
  
